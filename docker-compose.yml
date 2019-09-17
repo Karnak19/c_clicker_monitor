@@ -1,0 +1,19 @@
+version: "2.1"
+
+services:
+  docker-react:
+    image: c_clicker_monitor
+    build: .
+    environment:
+      NODE_ENV: production
+    networks:
+      - web
+    labels:
+      - traefik.frontend.rule=Host:bidart.wilders.dev;PathPrefixStrip:/c_clicker_monitor
+      - traefik.enable=true
+      - traefik.backend=c_clicker_monitor
+      - traefik.docker.network=web
+      - traefik.port=5001
+networks:
+  web:
+    external: true
